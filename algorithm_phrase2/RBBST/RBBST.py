@@ -47,7 +47,7 @@ class RBBST:#一个RBBST实例表示一棵红黑树
         if isinstance(a,str) and isinstance(b,str):
             return int(ord(a)-ord(b))
         
-    def put(self,key,val):
+    def put(self,key,val=None):
         self.root=self.__put(self.root,key,val)
         self.root.color=black
 
@@ -105,17 +105,19 @@ class RBBST:#一个RBBST实例表示一棵红黑树
         if not self.__isEmpty(self.root):self.root.color=black
 
     def __delete(self,h,key):
-        cmp=self.__cmp(h.key,key)
-        if cmp<0:
-            if not self.__isRed(self.left) and not self.__isRed(self.left.left):
+        if h==None:return 
+        if self.__cmp(key,h.key)<0:
+            if not self.__isRed(h.left) and not self.__isRed(h.left.left):
                 h=self.__MoveLeft(h)
-            h=self.__delete(h.left,key)
+            h.left=self.__delete(h.left,key)
         else:
             if self.__isRed(h.left):h=self.__rotateRight(h)
-            if self.__isEmpty(h.right):return None
+            if self.__cmp(key,h.key)==0 and self.__isEmpty(h.right):
+                del h
+                return None
             if not self.__isEmpty(h.right) and not self.__isEmpty(h.right.left):
                 h=self.__MoveRight(h)
-            if cmp==0:
+            if self.__cmp(key,h.key)==0:
                 min=self.__min(h.right)
                 h.key=min.key
                 h.val=min.val
@@ -141,13 +143,21 @@ class RBBST:#一个RBBST实例表示一棵红黑树
         print(self.root.left)
         print(self.root.right)
         
-pair=input()
-key,val=pair.split()
-tree=RBBST(key,val)
-for i in range(9):
-    pair=input()
-    key,val=pair.split()
-    tree.put(key,val)
-tree.delete('C')
+tree=RBBST('A',1)
+tree.put('B')
+tree.put('C')
+tree.put('D')
+tree.put('E')
+tree.put('F')
+tree.put('G')
+tree.put('H')
+tree.put('I')
+tree.put('J')
+tree.put('K')
+tree.put('L')
+tree.put('M')
+tree.put('N')
+print(tree)
+tree.delete('H')
 print(tree)
 print(tree.get('A'))
