@@ -4,6 +4,7 @@
 #include<climits>
 #include<ctime>
 #include<algorithm>
+#include<map>
 using namespace std;
 class TREAP{
     private:
@@ -83,7 +84,8 @@ TREAP::NODE* TREAP::insert(NODE *h,int k){
     return fixup(h);
 }
 TREAP::NODE* TREAP::dele(NODE *h,int k){
-    if(k<h->key)h->l=dele(h->l,k);
+    if (h==NULL)return NULL;
+    else if(k<h->key)h->l=dele(h->l,k);
     else if(k>h->key)h->r=dele(h->r,k);
     else if(k==h->key){
         if(h->cnt>1){h->cnt--;h->size--;return h;}
@@ -151,5 +153,29 @@ int main()
             default:break;
         }
     }
-    return 0;
+    // TREAP sl=TREAP(1);
+    // map<int,int> m; 
+    // clock_t s=clock();
+    // for(int i=0;i<100000;i++){
+    //     int key=rand(),val=rand();
+    //     sl.insert(key);
+    // }
+    // for(int i=0;i<100000;i++){
+    //     int key=rand();
+    //     if(i&1)sl.dele(key);
+    // }
+    // clock_t e=clock();
+    // std::cout<<"Performance of TREAP:"<<(double)(e-s)<<std::endl;
+    // s=clock();
+    // for(int i=0;i<1e5;i++){
+    //     int key=rand(),val=rand();
+    //     m[key]=val;
+    // }
+    // for(int i=0;i<1e5;i++){
+    //     int key=rand();
+    //     if(i&1)m.erase(key);
+    // }
+    // e=clock();
+    // std::cout<<"Performance of built-in map:"<<(double)(e-s)<<std::endl;
+    // return 0;
 }
