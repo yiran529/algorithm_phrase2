@@ -8,11 +8,11 @@
 using namespace std;
 vector<int> To[N],SCCv[N];
 bool inStack[N],visited[N];
-int low[N],dfn[N],time,sccNum,n,m,SCCtag[N];
+int low[N],dfn[N],t,sccNum,n,m,SCCtag[N];
 stack<int> st;
 void sccdfs(int u){//Tarjan算法
     st.push(u);
-    low[u]=dfn[u]=++time;
+    low[u]=dfn[u]=++t;
     inStack[u]=true;
     visited[u]=true;
     int l=To[u].size();
